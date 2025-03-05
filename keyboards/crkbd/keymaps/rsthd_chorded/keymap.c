@@ -33,10 +33,10 @@ enum custom_keycodes {
     QKRETURN,
     QKTRAIT,
     QKIMPL,
-    // DERIVE,
-    // CRATE,
-    // WHERE,
-    // CONST,
+    QKWHERE,
+    QKDERIVE,
+    QKCRATE,
+    QKCONST,
     // FORMAT,
     // USIZE,
     // MOVE,
@@ -121,6 +121,26 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             SEND_STRING("impl");
         }
         break;
+      case QKWHERE:
+        if (record->event.pressed) {
+            SEND_STRING("where");
+        }
+        break;
+      case QKDERIVE:
+        if (record->event.pressed) {
+            SEND_STRING("#[derive(");
+        }
+        break;
+      case QKCRATE:
+        if (record->event.pressed) {
+            SEND_STRING("crate::");
+        }
+        break;
+      case QKCONST:
+        if (record->event.pressed) {
+            SEND_STRING("const");
+        }
+        break;
     }
     return true;
 };
@@ -170,7 +190,7 @@ KC_LGUI,LCTL_T(KC_PSLS),   KC_V,    KC_G,    KC_P,    KC_B,                     
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
         KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,                    QKUNWRAP, QKEXPECT, QKCLONE,  QKSOME,  QKNONE,QKRETURN,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-        KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,                      QKTRAIT,  QKIMPL,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
+        KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,                      QKTRAIT,  QKIMPL, QKWHERE,QKDERIVE, QKCRATE, QKCONST,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                             KC_NO,   KC_NO,   KC_NO,      KC_NO,   KC_NO,   KC_NO
                                       //`--------------------------'  `--------------------------'
