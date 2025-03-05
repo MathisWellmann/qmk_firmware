@@ -19,17 +19,24 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include QMK_KEYBOARD_H
 
 enum custom_keycodes {
-    UNWRAP,
-    EXPECT,
-    CLONE,
-    // RESULT,
+    QKUNWRAP = SAFE_RANGE,
+    QKEXPECT,
+    QKCLONE,
+    QKSTRUCT,
+    QKENUM,
+    QKTYPE,
+    QKTRUE,
+    QKFALSE,
+    QKNONE,
+    QKSOME,
+    QKRESULT,
+    QKRETURN,
+    QKTRAIT,
+    QKIMPL,
     // DERIVE,
     // CRATE,
     // WHERE,
     // CONST,
-    // STRUCT,
-    // ENUM,
-    // TYPE,
     // FORMAT,
     // USIZE,
     // MOVE,
@@ -38,33 +45,82 @@ enum custom_keycodes {
     // LOOP,
     // ITER,
     // MATCH,
-    // TRUE,
-    // FALSE,
     // SUPER,
-    // NONE,
-    // SOME,
     // TEST,
-    // RETURN,
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-      case UNWRAP:
+      case QKUNWRAP:
         if (record->event.pressed) {
             SEND_STRING(".unwrap()");
         }
         break;
-      case EXPECT:
+      case QKEXPECT:
         if (record->event.pressed) {
             SEND_STRING(".expect(");
         }
         break;
-      case CLONE:
+      case QKCLONE:
         if (record->event.pressed) {
             SEND_STRING(".clone()");
         }
         break;
-            
+      case QKSTRUCT:
+        if (record->event.pressed) {
+            SEND_STRING("struct ");
+        }
+        break;
+      case QKENUM:
+        if (record->event.pressed) {
+            SEND_STRING("enum ");
+        }
+        break;
+      case QKTYPE:
+        if (record->event.pressed) {
+            SEND_STRING("type ");
+        }
+        break;
+      case QKTRUE:
+        if (record->event.pressed) {
+            SEND_STRING("true");
+        }
+        break;
+      case QKFALSE:
+        if (record->event.pressed) {
+            SEND_STRING("false");
+        }
+        break;
+      case QKSOME:
+        if (record->event.pressed) {
+            SEND_STRING("Some(");
+        }
+        break;
+      case QKNONE:
+        if (record->event.pressed) {
+            SEND_STRING("None");
+        }
+        break;
+      case QKRESULT:
+        if (record->event.pressed) {
+            SEND_STRING("Result<");
+        }
+        break;
+      case QKRETURN:
+        if (record->event.pressed) {
+            SEND_STRING("return ");
+        }
+        break;
+      case QKTRAIT:
+        if (record->event.pressed) {
+            SEND_STRING("trait ");
+        }
+        break;
+      case QKIMPL:
+        if (record->event.pressed) {
+            SEND_STRING("impl");
+        }
+        break;
     }
     return true;
 };
@@ -110,11 +166,11 @@ KC_LGUI,LCTL_T(KC_PSLS),   KC_V,    KC_G,    KC_P,    KC_B,                     
 
     [3] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-        KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,                      UNWRAP,   EXPECT,   CLONE,   KC_NO,   KC_NO,   KC_NO,
+        KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,                     QKSTRUCT,  QKENUM,  QKTYPE,  QKTRUE,  QKFALSE,QKRESULT,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-        KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,                        KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
+        KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,                    QKUNWRAP, QKEXPECT, QKCLONE,  QKSOME,  QKNONE,QKRETURN,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-        KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,                        KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
+        KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,                      QKTRAIT,  QKIMPL,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                             KC_NO,   KC_NO,   KC_NO,      KC_NO,   KC_NO,   KC_NO
                                       //`--------------------------'  `--------------------------'
