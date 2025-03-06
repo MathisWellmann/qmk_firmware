@@ -37,6 +37,10 @@ enum custom_keycodes {
     QKDERIVE,
     QKCRATE,
     QKCONST,
+    QKINTO,
+    QKTESTMOD,
+    QKTEST,
+    QKEMAIL,
     // FORMAT,
     // USIZE,
     // MOVE,
@@ -46,7 +50,6 @@ enum custom_keycodes {
     // ITER,
     // MATCH,
     // SUPER,
-    // TEST,
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -141,6 +144,26 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             SEND_STRING("const");
         }
         break;
+      case QKINTO:
+        if (record->event.pressed) {
+            SEND_STRING(".into()");
+        }
+        break;
+      case QKTESTMOD:
+        if (record->event.pressed) {
+            SEND_STRING("#[cfg(test)]\nmod test {");
+        }
+        break;
+      case QKTEST:
+        if (record->event.pressed) {
+            SEND_STRING("#[test]");
+        }
+        break;
+      case QKEMAIL:
+        if (record->event.pressed) {
+            SEND_STRING("wellmannmathis@gmail.com");
+        }
+        break;
     }
     return true;
 };
@@ -186,9 +209,9 @@ KC_LGUI,LCTL_T(KC_PSLS),   KC_V,    KC_G,    KC_P,    KC_B,                     
 
     [3] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-        KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,                     QKSTRUCT,  QKENUM,  QKTYPE,  QKTRUE,  QKFALSE,QKRESULT,
+      QKEMAIL,   KC_NO,   KC_NO,   KC_NO,QKTESTMOD, QKTEST,                     QKSTRUCT,  QKENUM,  QKTYPE,  QKTRUE,  QKFALSE,QKRESULT,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-        KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,                    QKUNWRAP, QKEXPECT, QKCLONE,  QKSOME,  QKNONE,QKRETURN,
+        KC_NO,   KC_NO,   KC_NO,   KC_NO,  QKINTO,   KC_NO,                    QKUNWRAP, QKEXPECT, QKCLONE,  QKSOME,  QKNONE,QKRETURN,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
         KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,                      QKTRAIT,  QKIMPL, QKWHERE,QKDERIVE, QKCRATE, QKCONST,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
