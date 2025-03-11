@@ -44,9 +44,12 @@ enum custom_keycodes {
     QKPRINT,
     QKASSERT,
     QKDASSERT,
+    QKASSERTEQ,
+    QKDASSERTEQ,
     QKLET,
     QKLETM,
     QKPANIC,
+    QKTODO,
     QKMATCH,
     // FORMAT,
     // USIZE,
@@ -186,6 +189,16 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             SEND_STRING("assert2::debug_assert!(");
         }
         break;
+      case QKASSERTEQ:
+        if (record->event.pressed) {
+            SEND_STRING("assert_eq!(");
+        }
+        break;
+      case QKDASSERTEQ:
+        if (record->event.pressed) {
+            SEND_STRING("debug_assert_eq!(");
+        }
+        break;
       case QKLET:
         if (record->event.pressed) {
             SEND_STRING("let ");
@@ -204,6 +217,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       case QKMATCH:
         if (record->event.pressed) {
             SEND_STRING("match ");
+        }
+        break;
+      case QKTODO:
+        if (record->event.pressed) {
+            SEND_STRING("todo!()");
         }
         break;
      }
@@ -251,11 +269,11 @@ KC_LGUI,LCTL_T(KC_PSLS),   KC_V,    KC_G,    KC_P,    KC_B,                     
 
     [3] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      QKEMAIL,   KC_NO,   KC_NO,   KC_NO,QKTESTMOD, QKTEST,                     QKSTRUCT,  QKENUM,  QKTYPE,  QKTRUE,  QKFALSE,QKRESULT,
+      QKEMAIL,   KC_NO,   KC_NO, QKTODO,QKTESTMOD, QKTEST,                     QKSTRUCT,  QKENUM,  QKTYPE,  QKTRUE,  QKFALSE,QKRESULT,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-        KC_NO, QKSOME, QKPANIC,   QKLET,  QKINTO, QKPRINT,                     QKMATCH,   QKNONE, QKCLONE,   QKIMPL,  KC_NO,QKRETURN,
+        KC_NO, QKSOME, QKPANIC,   QKLET,  QKINTO, QKASSERT,                     QKMATCH,   QKNONE, QKCLONE,   QKIMPL,  KC_NO,QKRETURN,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-        KC_NO,   KC_NO,   KC_NO,  QKLETM,QKASSERT,QKDASSERT,                     QKTRAIT, QKWHERE,   KC_NO,QKDERIVE, QKCRATE, QKCONST,
+QKASSERTEQ,QKDASSERTEQ,   KC_NO,  QKLETM, QKPRINT,QKDASSERT,                     QKTRAIT, QKWHERE,   KC_NO,QKDERIVE, QKCRATE, QKCONST,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                             KC_NO,   KC_NO,   KC_NO,   QKEXPECT,QKUNWRAP,   KC_NO
                                       //`--------------------------'  `--------------------------'
